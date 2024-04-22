@@ -1,0 +1,33 @@
+name: Build and Push to ACR
+on:
+  workflow_dispatch:
+#   push:
+#     branches:
+#       - 'main'
+jobs:
+  build:
+    name: 'Build and Push to ACR'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Docker Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.AZURE_URL }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build Docker web image
+        run: |
+          docker build -t ${{ secrets.AZURE_URL }}/web:latest -f src/Web/Dockerfile ./src
+          
+      - name: Push Docker image to ACR
+        run: |
+          docker push ${{ secrets.AZURE_URL }}/web:latest

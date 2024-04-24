@@ -27,4 +27,4 @@ jobs:
           resource-group: kubernetes-cluster-rg
   
       - name: Deploy Kubernetes Pod
-        run: kubectl apply -f kirNaumenko/eShopOnWeb/.github/workflows/kubernetes/frontend-pod.yml
+        run: kubectl apply -f ./kubernetes/frontend-pod.yml

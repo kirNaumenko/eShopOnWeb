@@ -1,0 +1,30 @@
+name: Deploy to AKS
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: 'Build and Push to ACR'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  
+      - name: Set up Kubectl
+        uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: knaumenko-aks
+          resource-group: kubernetes-cluster-rg
+  
+      - name: Deploy Kubernetes Pod
+        run: kubectl apply -f kirNaumenko/eShopOnWeb/.github/workflows/kubernetes/frontend-pod.yml

@@ -26,5 +26,8 @@ jobs:
           cluster-name: knaumenko-aks
           resource-group: kubernetes-cluster-rg
   
+      - name: Deploy secret for acr
+        run: kubectl apply -f ./kubernetes/acr-secret.yml
+
       - name: Deploy Kubernetes Pod
         run: kubectl apply -f ./kubernetes/frontend-pod.yml

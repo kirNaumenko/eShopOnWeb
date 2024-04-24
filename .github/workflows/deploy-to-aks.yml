@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   deploy:
-    name: 'Build and Push to ACR'
+    name: 'Deploy app to AKS'
     runs-on: ubuntu-latest
 
     defaults:

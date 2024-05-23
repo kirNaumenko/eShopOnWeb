@@ -33,5 +33,8 @@ jobs:
       - name: Deploy secret for acr
         run: kubectl create secret docker-registry acr-credentials --docker-server=knaumenkocontainerregistry.azurecr.io --docker-username=${{ secrets.ACR_USERNAME }} --docker-password=${{ secrets.ACR_PASSWORD }} --docker-email=kir.naumenko@gmail.com
 
-      - name: Deploy Kubernetes Pod
-        run: kubectl apply -f ./kubernetes/frontend-pod.yml
+      - name: Apply frontend deployment
+        run: kubectl apply -f ./kubernetes/frontend-deployment.yml
+
+      - name: Apply frontend load balancer
+        run: kubectl apply -f ./kubernetes/frontend-service.yml

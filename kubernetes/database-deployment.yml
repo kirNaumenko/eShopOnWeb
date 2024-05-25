@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    tier: database
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+        tier: database
+    spec:
+      containers:
+      - name: backend
+        image: mcr.microsoft.com/azure-sql-edge
+        ports:
+        - containerPort: 1433
+        imagePullPolicy: Always
+        env:
+        - name: SA_PASSWORD
+          value: "@someThingComplicated1234"
+        - name: ACCEPT_EULA
+          value: "Y"

@@ -33,6 +33,12 @@ jobs:
       - name: Deploy secret for acr
         run: kubectl create secret docker-registry acr-credentials --docker-server=knaumenkocontainerregistry.azurecr.io --docker-username=${{ secrets.ACR_USERNAME }} --docker-password=${{ secrets.ACR_PASSWORD }} --docker-email=kir.naumenko@gmail.com --dry-run=client -o yaml | kubectl apply -f -
 
+      - name: Apply database deployment
+        run: kubectl apply -f ./kubernetes/database-deployment.yml
+    
+      - name: Apply database cluster ip
+        run: kubectl apply -f ./kubernetes/database-service.yml
+
       - name: Apply backend deployment
         run: kubectl apply -f ./kubernetes/backend-deployment.yml
   

@@ -31,3 +31,11 @@ jobs:
       - name: Push Docker image to ACR
         run: |
           docker push ${{ secrets.AZURE_URL }}/web:latest
+
+      - name: Build Docker api image
+        run: |
+          docker build -t ${{ secrets.AZURE_URL }}/api:latest -f src/PublicApi/Dockerfile ./
+            
+      - name: Push Docker image to ACR
+        run: |
+          docker push ${{ secrets.AZURE_URL }}/api:latest

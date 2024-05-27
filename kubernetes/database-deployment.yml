@@ -16,7 +16,7 @@ spec:
         tier: database
     spec:
       containers:
-      - name: backend
+      - name: database
         image: mcr.microsoft.com/azure-sql-edge
         ports:
         - containerPort: 1433
@@ -24,7 +24,7 @@ spec:
         volumeMounts:
         - name: database-init-volume
           mountPath: /script
-          command: ["/script/database-init.sh"]
+        command: ["/script/database-init.sh"]
         env:
         - name: SA_PASSWORD
           value: "@someThingComplicated1234"
@@ -34,4 +34,4 @@ spec:
       - name: database-init-volume
         configMap:
           name: database-init
-          defaultMode: 0744       
+          defaultMode: 0744

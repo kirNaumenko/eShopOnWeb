@@ -11,7 +11,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
             - |
-              cd app/src/Web
+              ls
               dotnet restore && \
               dotnet tool update dotnet-ef --version 8.0.2 && \
               dotnet tool restore && \

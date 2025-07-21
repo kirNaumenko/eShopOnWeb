@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: database
-        image: mcr.microsoft.com/azure-sql-edge
+        image: mcr.microsoft.com/azure-sql-edge:1.0.6
         ports:
         - containerPort: 1433
         imagePullPolicy: Always

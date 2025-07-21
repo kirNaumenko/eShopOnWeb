@@ -21,17 +21,17 @@ spec:
         ports:
         - containerPort: 1433
         imagePullPolicy: Always
-        volumeMounts:
-        - name: database-init-volume
-          mountPath: /script
-        command: ["/script/database-init.sh"]
+        # volumeMounts:
+        # - name: database-init-volume
+        #   mountPath: /script
+        # command: ["/script/database-init.sh"]
         env:
         - name: SA_PASSWORD
           value: "@someThingComplicated1234"
         - name: ACCEPT_EULA
           value: "Y"
-      volumes:
-      - name: database-init-volume
-        configMap:
-          name: database-init
-          defaultMode: 0744
+      # volumes:
+      # - name: database-init-volume
+      #   configMap:
+      #     name: database-init
+      #     defaultMode: 0744

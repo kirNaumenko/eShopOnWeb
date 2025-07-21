@@ -14,6 +14,7 @@ spec:
               cd src/Web
               dotnet restore && \
               # dotnet tool update dotnet-ef --version 8.0.2 && \
+              dotnet tool update --global dotnet-ef
               dotnet tool restore && \
               dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release && \
               dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release

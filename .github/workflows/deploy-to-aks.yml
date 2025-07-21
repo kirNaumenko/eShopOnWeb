@@ -34,11 +34,21 @@ jobs:
 
       - name: Check files
         run: ls -R
+        
       - name: Apply database deployment
         run: kubectl apply -f ./kubernetes/database-deployment.yml
     
       - name: Apply database cluster ip
         run: kubectl apply -f ./kubernetes/database-service.yml
+
+      - name: Add data to db
+        working-directory: ./src/Web
+        run: |
+          dotnet restore
+          dotnet tool restore
+          dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+          dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+
 
       - name: Apply backend deployment
         run: kubectl apply -f ./kubernetes/backend-deployment.yml

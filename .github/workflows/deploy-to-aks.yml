@@ -41,14 +41,17 @@ jobs:
       - name: Apply database cluster ip
         run: kubectl apply -f ./kubernetes/database-service.yml
 
-      - name: Add data to db
-        working-directory: ./src/Web
-        run: |
-          dotnet restore
-          dotnet tool update dotnet-ef --version 8.0.2
-          dotnet tool restore
-          dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release
-          dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release
+      - name: Apply database cluster ip
+        run: kubectl apply -f ./kubernetes/database-migration-job.yml
+
+      # - name: Add data to db
+      #   working-directory: ./src/Web
+      #   run: |
+      #     dotnet restore
+      #     dotnet tool update dotnet-ef --version 8.0.2
+      #     dotnet tool restore
+      #     dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release
+      #     dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release
 
 
       - name: Apply backend deployment

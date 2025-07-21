@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-migration
+spec:
+  template:
+    spec:
+      containers:
+      - name: database-migration
+        image: knaumenkocontainerregistry.azurecr.io/initContainer:latest
+        command: ["/bin/sh", "-c"]
+        args:
+            - |
+              dotnet restore && \
+              dotnet tool update dotnet-ef --version 8.0.2 && \
+              dotnet tool restore && \
+              dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release && \
+              dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj --configuration Release
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=database.default.svc.cluster.local,1433;User Id=sa;Password=@someThingComplicated1234;Initial Catalog=Microsoft.eShopOnWeb.CatalogDb;TrustServerCertificate=true;Trusted_Connection=false;"
+      restartPolicy: Never
+  backoffLimit: 1

@@ -5,6 +5,7 @@ metadata:
 data:
   database-init.sh: |
     #!/bin/bash
+    ls -R
     cd ../Web/
     dotnet restore
     dotnet tool restore

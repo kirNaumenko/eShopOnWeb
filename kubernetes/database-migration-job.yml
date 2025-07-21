@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: database-migration
-        image: knaumenkocontainerregistry.azurecr.io/initContainer:latest
+        image: knaumenkocontainerregistry.azurecr.io/initcontainer:latest
         command: ["/bin/sh", "-c"]
         args:
             - |

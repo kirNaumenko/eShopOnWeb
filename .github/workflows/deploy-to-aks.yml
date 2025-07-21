@@ -32,6 +32,8 @@ jobs:
       - name: Apply configMap
         run: kubectl apply -f ./kubernetes/database-configmap.yml    
 
+      - name: Check files
+        run: ls -R
       - name: Apply database deployment
         run: kubectl apply -f ./kubernetes/database-deployment.yml
     

@@ -24,6 +24,14 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
+      - name: Build init db image
+        run: |
+          docker build -t ${{ secrets.AZURE_URL }}/initcontainer:latest -f src/Database/Dockerfile ./
+            
+      - name: Push Docker image to ACR
+        run: |
+          docker push ${{ secrets.AZURE_URL }}/initcontainer:latest
+      
       - name: Build Docker web image
         run: |
           docker build -t ${{ secrets.AZURE_URL }}/web:latest -f src/Web/Dockerfile ./
@@ -39,11 +47,3 @@ jobs:
       - name: Push Docker image to ACR
         run: |
           docker push ${{ secrets.AZURE_URL }}/api:latest
-      
-      - name: Build init db image
-        run: |
-          docker build -t ${{ secrets.AZURE_URL }}/initcontainer:latest -f src/Database/Dockerfile ./
-            
-      - name: Push Docker image to ACR
-        run: |
-          docker push ${{ secrets.AZURE_URL }}/initcontainer:latest

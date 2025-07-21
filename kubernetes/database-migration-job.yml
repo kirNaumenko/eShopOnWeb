@@ -20,4 +20,6 @@ spec:
         - name: ConnectionStrings__DefaultConnection
           value: "Server=database.default.svc.cluster.local,1433;User Id=sa;Password=@someThingComplicated1234;Initial Catalog=Microsoft.eShopOnWeb.CatalogDb;TrustServerCertificate=true;Trusted_Connection=false;"
       restartPolicy: Never
+      imagePullSecrets:
+      - name: acr-credentials
   backoffLimit: 1

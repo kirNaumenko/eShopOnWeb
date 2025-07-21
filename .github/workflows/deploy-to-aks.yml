@@ -46,7 +46,7 @@ jobs:
         run: |
           dotnet restore
           dotnet tool install --global dotnet-ef --version 8.0.2
-          dotnet tool restore
+          # dotnet tool restore
           dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
           dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
 

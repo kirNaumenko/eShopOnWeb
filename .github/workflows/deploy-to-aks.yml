@@ -29,26 +29,26 @@ jobs:
       - name: Deploy secret for acr
         run: kubectl create secret docker-registry acr-credentials --docker-server=knaumenkocontainerregistry.azurecr.io --docker-username=${{ secrets.ACR_USERNAME }} --docker-password=${{ secrets.ACR_PASSWORD }} --docker-email=kir.naumenko@gmail.com --dry-run=client -o yaml | kubectl apply -f -
 
-      # - name: Apply configMap
-      #   run: kubectl apply -f ./kubernetes/database-configmap.yml    
+      - name: Apply configMap
+        run: kubectl apply -f ./kubernetes/database-configmap.yml    
 
-      # - name: Check files
-      #   run: ls -R
+      - name: Check files
+        run: ls -R
         
-      # - name: Apply database deployment
-      #   run: kubectl apply -f ./kubernetes/database-deployment.yml
+      - name: Apply database deployment
+        run: kubectl apply -f ./kubernetes/database-deployment.yml
     
-      # - name: Apply database cluster ip
-      #   run: kubectl apply -f ./kubernetes/database-service.yml
+      - name: Apply database cluster ip
+        run: kubectl apply -f ./kubernetes/database-service.yml
 
-      - name: Add data to db
-        working-directory: ./src/Web
-        run: |
-          dotnet restore
-          dotnet tool update dotnet-ef --version 8.0.2
-          dotnet tool restore
-          dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
-          dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+      # - name: Add data to db
+      #   working-directory: ./src/Web
+      #   run: |
+      #     dotnet restore
+      #     dotnet tool update dotnet-ef --version 8.0.2
+      #     dotnet tool restore
+      #     dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+      #     dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
 
 
       - name: Apply backend deployment

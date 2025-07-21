@@ -5,10 +5,9 @@ metadata:
 data:
   database-init.sh: |
     #!/bin/bash
-    cd app
     ls
-    cd ../Web/
-    dotnet restore
-    dotnet tool restore
-    dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
-    dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+    # cd ../Web/
+    # dotnet restore
+    # dotnet tool restore
+    # dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+    # dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
